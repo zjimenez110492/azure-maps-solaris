@@ -13,6 +13,20 @@
   <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css" type="text/css">
 <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"></script>
 
+<script type="text/javascript">
+  function InitMap()
+  {
+      var map = new atlas.Map('myMap', {
+          center: [-122.33, 47.6],
+          zoom: 12,
+          language: 'en-US',
+          authOptions: {
+              authType: 'subscriptionKey',
+              subscriptionKey: 'Ig7tJXH-UpRatq-pBHaXGy3SdZ7ETJv5LBsvgR-lnd0'
+          }
+      });
+ }
+</script>
 </head>
 <body class="mat-typography">
   <app-root></app-root>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Coordenada } from './../../models/coordenada.model';
+import { Component, Input, OnInit } from '@angular/core';
 import * as atlas from 'azure-maps-control';
 
 @Component({
@@ -7,7 +8,8 @@ import * as atlas from 'azure-maps-control';
   styleUrls: ['./azure-map.component.css']
 })
 export class AzureMapComponent implements OnInit {
-
+  @Input() longitude: number;
+  @Input()  latitude: number;
   constructor() { }
 
   createMap() {
@@ -16,20 +18,14 @@ export class AzureMapComponent implements OnInit {
       view: 'Auto',
       showBuildingModels: true,
       showLogo: false,
-      style: "road",
+      style: "night",
       zoom: 11,
-      center: new atlas.data.Position(6.7735, 51.2277),
+      center: new atlas.data.Position(-76.5225, 3.43722),
       authOptions: {
         authType: atlas.AuthenticationType.subscriptionKey,
         subscriptionKey: 'Ig7tJXH-UpRatq-pBHaXGy3SdZ7ETJv5LBsvgR-lnd0'
       }
     });
-
-    // map.controls.add(new atlas.control.CompassControl(), {
-    //   position: atlas.ControlPosition.BottomLeft
-    // })
-
-    // add all controls
     map.controls.add([
       new atlas.control.ZoomControl(),
       new atlas.control.CompassControl(),
@@ -48,12 +44,15 @@ export class AzureMapComponent implements OnInit {
       //Add the layer to the map.
       map.layers.add(layer);
       //Create a point and add it to the data source.
-      dataSource.add(new atlas.data.Point([6.7735, 51.2277]));
+      dataSource.add(new atlas.data.Point([-76.5225, 3.43722]));
     })
   }
 
   ngOnInit(): void {
     this.createMap();
+  }
+  addPunto(c:Coordenada){
+console.log("Coordenada recibida:   ",c);
   }
 
 }
