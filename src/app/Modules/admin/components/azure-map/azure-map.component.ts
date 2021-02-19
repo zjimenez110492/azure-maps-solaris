@@ -10,10 +10,11 @@ import * as atlas from 'azure-maps-control';
 export class AzureMapComponent implements OnInit {
   @Input() longitude: number;
   @Input()  latitude: number;
+  map=null;
   constructor() { }
 
   createMap() {
-    var map = new atlas.Map('myMap', {
+    this.map= new atlas.Map('myMap', {
       language: 'en-US',
       view: 'Auto',
       showBuildingModels: true,
@@ -26,33 +27,30 @@ export class AzureMapComponent implements OnInit {
         subscriptionKey: 'Ig7tJXH-UpRatq-pBHaXGy3SdZ7ETJv5LBsvgR-lnd0'
       }
     });
-    map.controls.add([
-      new atlas.control.ZoomControl(),
-      new atlas.control.CompassControl(),
-      new atlas.control.PitchControl(),
-      new atlas.control.StyleControl()
-    ], {
-      position: atlas.ControlPosition.TopRight
-    });
 
-    map.events.add('ready', function () {
-      //Create a data source and add it to the map.
-      var dataSource = new atlas.source.DataSource();
-      map.sources.add(dataSource);
-      //Create a symbol layer to render icons and/or text at points on the map.
-      var layer = new atlas.layer.SymbolLayer(dataSource);
-      //Add the layer to the map.
-      map.layers.add(layer);
-      //Create a point and add it to the data source.
-      dataSource.add(new atlas.data.Point([-76.5225, 3.43722]));
-    })
   }
 
   ngOnInit(): void {
     this.createMap();
   }
-  addPunto(c:Coordenada){
-console.log("Coordenada recibida:   ",c);
+  addPunto(c:Coordenada)
+  {
+    console.log("Coordenada recibida:   ",c);
+    var marker = new atlas.HtmlMarker({
+      color: 'DodgerBlue',
+      text: '10',
+      position: [c.latitud, c.longitud],
+      popup: new atlas.Popup({
+          content: '<div style="padding:10px">Hello World</div>',
+          pixelOffset: [0, -30]
+      })
+  });
+  this.map.markers.add(marker);
+
+//Add a click event to toggle the popup.
+this.map.events.add('click',marker, () => {
+    marker.togglePopup();
+});
   }
 
 }
