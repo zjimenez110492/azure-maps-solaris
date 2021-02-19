@@ -1,0 +1,35 @@
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6 login-section-wrapper">
+
+        <div class="login-wrapper my-auto">
+          <h1 class="login-title">INGRESAR</h1>
+          <form [formGroup]="formulario">
+
+            <mat-form-field class="example-full-width">
+              <mat-label>Correo <small *ngIf="mailError()" style="color: red;">Formato correo
+                Inválido</small></mat-label>
+              <input matInput type="email" formControlName="email" name="email" id="email" class="form-control"
+              placeholder="email@ejemplo.com">
+            </mat-form-field>
+            <div class="form-group mb-4">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Contraseña</mat-label>
+                  <input matInput type="password" formControlName="password" name="password" id="password" class="form-control"
+                  placeholder="Ingrese su contraseña">
+                </mat-form-field>
+
+            </div>
+
+              <button  *ngIf="errores()" disabled>INGRESAR</button>
+              <button class="btn btn-primary" *ngIf="!errores()" (click)="ingresar()">INGRESAR</button>
+
+          </form>
+          <!-- <p class="login-wrapper-footer-text">No tiene una Cuenta? <a href="#!" class="text-reset">Registrese here</a></p>
+      -->
+        </div>
+      </div>
+
+    </div>
+  </div>
