@@ -46,7 +46,13 @@ export class FormPointAdminComponent implements OnInit {
         descripcion:this.formulario.get('descripcion').value
       }
       this.coordenada.emit(c);
-      Swal.fire('Marcador agregado')
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Marcador Agregado',
+        showConfirmButton: false,
+        timer: 1000
+      })
       this.ngOnInit();
   }
 }

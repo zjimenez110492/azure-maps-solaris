@@ -100,17 +100,22 @@ this.addPunto(c);
 
   addPunto(c: Coordenada) {
     console.log("Coordenada recibida:   ", c);
+
+
+    var popupTemplate = '<div class="customInfobox"><div class="name">{name}</div>{description}</div>';
+
+    let popup=new atlas.Popup({
+      content: '<div class="customInfobox" style="padding: 0.3cm;"> <p style="color: white;">'+c.descripcion+'</p></div>' +
+        c.descripcion + ' </div> ',
+      position: [c.latitud, c.longitud],
+      fillColor: 'rgba(0,8,8,0.8)',
+      closeButton: true,pixelOffset: [0, -18],
+    })
     var marker = new atlas.HtmlMarker({
       color: 'DodgerBlue',
       text: (this.indice) + '',
       position: [c.latitud, c.longitud],
-      popup: new atlas.Popup({
-        content: '<div  style="padding:10px;color:white; max-width: 3.5cm;">' +
-          c.descripcion + ' </div> ',
-        position: [c.latitud, c.longitud],
-        fillColor: 'rgba(0,0,0,0.8)',
-        closeButton: false
-      })
+      popup:popup
     });
     this.map.markers.add(marker);
     this.map.events.add('mouseover', marker, () => {
