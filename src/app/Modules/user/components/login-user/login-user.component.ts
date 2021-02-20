@@ -22,12 +22,7 @@ export class LoginUserComponent implements OnInit {
    /*  this.log=this.authService.log; */
 
   }
- /*  ngDoCheck(): void {
-  if(this.authService.isLoggedIn)
-  {
-    this.router.navigate(['admin']);
-  }
-  } */
+
   errores(): boolean
   {
     return (this.formulario.get('email').hasError('required') ||
