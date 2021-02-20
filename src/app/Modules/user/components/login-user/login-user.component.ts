@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/Modules/admin/models/usuario.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login-user',
@@ -60,6 +61,10 @@ export class LoginUserComponent implements OnInit {
      console.log("Resultado de login:   ",result);
      if(result.res){
        localStorage.setItem('token',result.token);
+       this.router.navigateByUrl('map');
+     }
+     else{
+      Swal.fire('usuario no registrado');
      }
    })
   }
