@@ -12,19 +12,21 @@ import { Router } from '@angular/router';
 })
 export class AzureMapComponent implements OnInit {
   @Input() longitude: number;
-  @Input()  latitude: number;
-  coordenadas:Coordenada[];
-  positionNav:number;
-  map=null;
-  usuario:string;
-  constructor(private coordenadasService:CoordenadasService,   public router: Router) { }
+  @Input() latitude: number;
+  coordenadas: Coordenada[];
+  positionNav: number;
+  map = null;
+  usuario: string;
+  indice: number;
+  constructor(private coordenadasService: CoordenadasService, public router: Router) { }
   ngOnInit(): void {
-    if(localStorage.getItem('token')==''){
+    this.indice = 1;
+    if (localStorage.getItem('token') == '') {
       this.router.navigateByUrl('');
     }
-          this.usuario=localStorage.getItem('usuario');
-          this.coordenadas=[];
-          this.positionNav=0;
+    this.usuario = localStorage.getItem('usuario');
+    this.coordenadas = [];
+    this.positionNav = -1;
 
   }
   ngAfterViewInit(): void {
@@ -33,14 +35,13 @@ export class AzureMapComponent implements OnInit {
     this.createMap();
   }
 
-  createMap()
-  {
-    let centro:Coordenada;
-    this.coordenadasService.getCentro().subscribe(result=>{
+  createMap() {
+    let centro: Coordenada;
+    this.coordenadasService.getCentro().subscribe(result => {
 
-      centro=result;
-      console.log("CENTRO:   ",centro);
-      this.map= new atlas.Map('myMap', {
+      centro = result;
+      console.log("CENTRO:   ", centro);
+      this.map = new atlas.Map('myMap', {
         language: 'en-US',
         view: 'Auto',
         showBuildingModels: true,
@@ -56,80 +57,69 @@ export class AzureMapComponent implements OnInit {
       this.marcarPuntos();
     });
   }
-  marcarPuntos(){
+  marcarPuntos() {
     this.coordenadasService.getCoordenadas().subscribe(
-      result=>{
-        for(let c of result){
+      result => {
+        for (let c of result) {
           this.coordenadas.push(c);
           this.addPunto(c);
         }
       });
   }
-  moverDerecha(){
-    if(this.positionNav<(this.coordenadas.length-1)){
+  addCoordenada(c:Coordenada){
+    this.coordenadas.push(c);
+this.addPunto(c);
+  }
+  moverDerecha() {
+    if (this.positionNav < (this.coordenadas.length-1)) {
       this.positionNav++;
-      console.log("Coordenada derecha:  ",this.coordenadas[this.positionNav].longitud, this.coordenadas[this.positionNav].latitud);
-       this.map= new atlas.Map('myMap', {
-        language: 'en-US',
-        view: 'Auto',
-        showBuildingModels: true,
-        showLogo: false,
-        style: "night",
-        zoom: 15,
-        center: new atlas.data.Position(this.coordenadas[this.positionNav].latitud, this.coordenadas[this.positionNav].longitud),
-        authOptions: {
-          authType: atlas.AuthenticationType.subscriptionKey,
-          subscriptionKey: 'Ig7tJXH-UpRatq-pBHaXGy3SdZ7ETJv5LBsvgR-lnd0'
-        }
-      });
+
     }
-    this.marcarPuntos();
-
-
-
+    else{
+      this.positionNav=0;
+    }
+    this.map.setCamera({
+      bounds: [this.coordenadas[this.positionNav].latitud - 0.003, this.coordenadas[this.positionNav].longitud - 0.003, this.coordenadas[this.positionNav].latitud + 0.003, this.coordenadas[this.positionNav].longitud + 0.003],
+      padding: 10
+    });
   }
-  moverIzquierda(){
-    if(this.positionNav>0){
+  moverIzquierda() {
+    if (this.positionNav > 0) {
       this.positionNav--;
-      this.map= new atlas.Map('myMap', {
-       language: 'en-US',
-       view: 'Auto',
-       showBuildingModels: true,
-       showLogo: false,
-       style: "night",
-       zoom: 15,
-       center: new atlas.data.Position(this.coordenadas[this.positionNav].latitud, this.coordenadas[this.positionNav].longitud),
-       authOptions: {
-         authType: atlas.AuthenticationType.subscriptionKey,
-         subscriptionKey: 'Ig7tJXH-UpRatq-pBHaXGy3SdZ7ETJv5LBsvgR-lnd0'
-       }
-     });
-   }
-   this.marcarPuntos();
+
+    }
+    else{
+      this.positionNav=this.coordenadas.length-1;
+
+    }
+    this.map.setCamera({
+      bounds: [this.coordenadas[this.positionNav].latitud - 0.003, this.coordenadas[this.positionNav].longitud - 0.003, this.coordenadas[this.positionNav].latitud + 0.003, this.coordenadas[this.positionNav].longitud + 0.003],
+      padding: 10
+    });
   }
 
-  addPunto(c:Coordenada)
-  {
-    console.log("Coordenada recibida:   ",c);
+  addPunto(c: Coordenada) {
+    console.log("Coordenada recibida:   ", c);
     var marker = new atlas.HtmlMarker({
       color: 'DodgerBlue',
-      text: c.descripcion,
+      text: (this.indice) + '',
       position: [c.latitud, c.longitud],
       popup: new atlas.Popup({
-        content: '<div  style="padding:10px;color:white; max-width: 3.5cm;">'+
-        c.descripcion+' </div> ',
+        content: '<div  style="padding:10px;color:white; max-width: 3.5cm;">' +
+          c.descripcion + ' </div> ',
         position: [c.latitud, c.longitud],
         fillColor: 'rgba(0,0,0,0.8)',
         closeButton: false
       })
-      });
-      this.map.markers.add(marker);
-      this.map.events.add('mouseover',marker, () => {
-          marker.togglePopup();
-      });
+    });
+    this.map.markers.add(marker);
+    this.map.events.add('mouseover', marker, () => {
+      marker.togglePopup();
+    });
+    this.indice++;
 
   }
-  cerrar(){
+  cerrar() {
     Swal.fire({
       title: 'Desea Cerrar Sesión?',
       showDenyButton: false,
@@ -139,13 +129,13 @@ export class AzureMapComponent implements OnInit {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        localStorage.setItem('token','');
+        localStorage.setItem('token', '');
         this.router.navigateByUrl('');
         Swal.fire('Sesión Cerrada');
       }
     })
   }
-  home(){
+  home() {
     this.router.navigateByUrl('');
   }
 
