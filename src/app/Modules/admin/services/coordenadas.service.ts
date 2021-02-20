@@ -12,7 +12,7 @@ export class CoordenadasService {
   constructor(private http: HttpClient) { }
   getCoordenadas(): Observable<any>
     {
-      return this.http.get(environment.url_back_end +'/coordenadas');
+      return this.http.get(environment.url_back_end +'/coordenadas',{ headers: httpOptions });
     }
     getCentro(): Observable<any>
     {

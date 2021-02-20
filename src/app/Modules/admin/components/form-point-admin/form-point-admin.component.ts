@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 import { Coordenada } from '../../models/coordenada.model';
 
 @Component({
@@ -45,5 +46,7 @@ export class FormPointAdminComponent implements OnInit {
         descripcion:this.formulario.get('descripcion').value
       }
       this.coordenada.emit(c);
+      Swal.fire('Marcador agregado')
+      this.ngOnInit();
   }
 }

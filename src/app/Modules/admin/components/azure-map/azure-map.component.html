@@ -1,8 +1,24 @@
-
-<div id="myMap" style="height: 10cm;">
-
-</div>
 <div class="">
-  <app-form-point-admin (coordenada)="addPunto($event)"></app-form-point-admin>
+  <ul class="row nav nav-pills" style="">
+    <li class="nav-item">
+      <a class="nav-link active fuente2" style="cursor: pointer;">Mapa</a>
+    </li>
+  </ul>
+  <div class="" style="padding: 1cm;">
+    <div class="row card mat-elevation-z8 col-11 redondeado" style=" min-width: 10cm; padding-top: 1cm;">
+      <div class="redondeado" id="myMap" style="height: 10cm; max-width: 99%; ">
+      </div> <br>
+      <div class="col-12 justify-content-center" style="position: relative; left: 45%;">
+        <button (click)="moverIzquierda()"><span class="material-icons">
+          keyboard_arrow_left
+          </span></button>
+          <button (click)="moverDerecha()"><span class="material-icons">
+            keyboard_arrow_right
+            </span></button>
+      </div>
+      <div class="row ">
+        <app-form-point-admin (coordenada)="addPunto($event)"></app-form-point-admin>
+      </div>
+    </div>
+  </div>
 </div>
-

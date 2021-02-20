@@ -11,8 +11,20 @@ import * as atlas from 'azure-maps-control';
 export class AzureMapComponent implements OnInit {
   @Input() longitude: number;
   @Input()  latitude: number;
+  coordenadas:Coordenada[];
+  positionNav:number;
   map=null;
   constructor(private coordenadasService:CoordenadasService) { }
+  ngOnInit(): void {
+this.coordenadas=[];
+this.positionNav=0;
+
+  }
+  ngAfterViewInit(): void {
+    //Called after every check of the component's view. Applies to components only.
+    //Add 'implements AfterViewChecked' to the class.
+    this.createMap();
+  }
 
   createMap()
   {
@@ -41,17 +53,59 @@ export class AzureMapComponent implements OnInit {
     this.coordenadasService.getCoordenadas().subscribe(
       result=>{
         for(let c of result){
+          this.coordenadas.push(c);
           this.addPunto(c);
         }
       });
   }
+  moverDerecha(){
+    if(this.positionNav<(this.coordenadas.length-1)){
+      this.positionNav++;
+      console.log("Coordenada derecha:  ",this.coordenadas[this.positionNav].longitud, this.coordenadas[this.positionNav].latitud);
+       this.map= new atlas.Map('myMap', {
+        language: 'en-US',
+        view: 'Auto',
+        showBuildingModels: true,
+        showLogo: false,
+        style: "night",
+        zoom: 15,
+        center: new atlas.data.Position(this.coordenadas[this.positionNav].latitud, this.coordenadas[this.positionNav].longitud),
+        authOptions: {
+          authType: atlas.AuthenticationType.subscriptionKey,
+          subscriptionKey: 'Ig7tJXH-UpRatq-pBHaXGy3SdZ7ETJv5LBsvgR-lnd0'
+        }
+      });
+    }
+    this.marcarPuntos();
 
 
-
-  ngOnInit(): void {
-    this.createMap();
 
   }
+  moverIzquierda(){
+    if(this.positionNav>0){
+      this.positionNav--;
+      this.map= new atlas.Map('myMap', {
+       language: 'en-US',
+       view: 'Auto',
+       showBuildingModels: true,
+       showLogo: false,
+       style: "night",
+       zoom: 15,
+       center: new atlas.data.Position(this.coordenadas[this.positionNav].latitud, this.coordenadas[this.positionNav].longitud),
+       authOptions: {
+         authType: atlas.AuthenticationType.subscriptionKey,
+         subscriptionKey: 'Ig7tJXH-UpRatq-pBHaXGy3SdZ7ETJv5LBsvgR-lnd0'
+       }
+     });
+   }
+
+   this.marcarPuntos();
+
+  }
+
+
+
+
   addPunto(c:Coordenada)
   {
     console.log("Coordenada recibida:   ",c);
