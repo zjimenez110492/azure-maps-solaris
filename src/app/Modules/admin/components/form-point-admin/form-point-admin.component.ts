@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Coordenada } from '../../models/coordenada.model';
 
 @Component({
@@ -20,6 +21,7 @@ export class FormPointAdminComponent implements OnInit {
       {
         latitud: [, [Validators.required]],
         longitud: [, [Validators.required]],
+        descripcion:[, [Validators.required]]
       });
     this.formulario.valueChanges.subscribe(
       value => {/*
@@ -30,7 +32,8 @@ export class FormPointAdminComponent implements OnInit {
   errores(): boolean
   {
     return (this.formulario.get('latitud').hasError('required') ||
-    this.formulario.get('longitud').hasError('required')
+    this.formulario.get('longitud').hasError('required')||
+    this.formulario.get('descripcion').hasError('required')
       ) ? true : false;
 
   }
@@ -38,7 +41,8 @@ export class FormPointAdminComponent implements OnInit {
   {
       let c:Coordenada={
         latitud:this.formulario.get('latitud').value,
-        longitud:this.formulario.get('longitud').value
+        longitud:this.formulario.get('longitud').value,
+        descripcion:this.formulario.get('descripcion').value
       }
       this.coordenada.emit(c);
   }

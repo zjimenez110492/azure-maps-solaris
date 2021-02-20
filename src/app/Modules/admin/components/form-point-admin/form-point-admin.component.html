@@ -1,16 +1,21 @@
 
 <form [formGroup]="formulario">
-
-  <mat-form-field class="example-full-width">
+  <mat-form-field class="desc">
+    <mat-label>Descripcion</mat-label>
+    <input matInput type="text" formControlName="descripcion" name="descripcion" id="descripcion" class="form-control"
+    placeholder="Digite una Descripción">
+  </mat-form-field>
+  <mat-form-field class="lat">
     <mat-label>Latitud </mat-label>
     <input matInput type="number" formControlName="latitud" name="latitud" id="latitud" class="form-control"
     placeholder="Digite latitud">
   </mat-form-field>
-  <mat-form-field class="example-full-width">
+  <mat-form-field class="long">
     <mat-label>Latitud</mat-label>
     <input matInput type="number" formControlName="longitud" name="longitud" id="longitud" class="form-control"
     placeholder="Digite longitud">
   </mat-form-field>
+
 
 
     <button  *ngIf="errores()" disabled>INGRESAR</button>

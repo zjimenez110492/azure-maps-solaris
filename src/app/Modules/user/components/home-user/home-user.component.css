@@ -2,3 +2,14 @@
   background-image: url("../../../../../assets/img-inicio.jpeg");
   height: 15cm;
 }
+.tittle{
+  font-weight: 1000;
+  text-align: center;
+  align-content: center; color: white;  padding-top: 2cm; font-size: 4cm;
+}
+
+.sub-tittle{
+  text-align: center;
+  align-content: center; color: white;  padding-top: 2cm; font-size: 3cm;
+}
+

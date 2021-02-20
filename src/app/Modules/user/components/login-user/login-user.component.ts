@@ -1,6 +1,8 @@
+import { LoginService } from './../../../admin/services/login.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Usuario } from 'src/app/Modules/admin/models/usuario.model';
 
 @Component({
   selector: 'app-login-user',
@@ -12,7 +14,7 @@ export class LoginUserComponent implements OnInit {
   formulario: FormGroup;
   log=false;
   constructor(private formBuilder: FormBuilder, /* private  authService:  AuthService, */
-    public router: Router) { }
+    public router: Router, private loginService:LoginService) { }
 
   ngOnInit() {
     this.crearFormulario();
@@ -50,10 +52,16 @@ export class LoginUserComponent implements OnInit {
   }
   ingresar()
   {
-    /* this.authService.SignIn(
-      this.formulario.get('email').value,
-      this.formulario.get('password').value
-      ); */
+    let u:Usuario={
+      usuario:this.formulario.get('email').value,
+      password:this.formulario.get('password').value
+    };
+   this.loginService.onLogin(u).subscribe(result=>{
+     console.log("Resultado de login:   ",result);
+     if(result.res){
+       localStorage.setItem('token',result.token);
+     }
+   })
   }
 
 }
