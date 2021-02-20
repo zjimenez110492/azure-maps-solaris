@@ -4,3 +4,14 @@
 -webkit-border-radius: 10px 10px 10px 10px;
 border: 0px solid #000000;
 }
+.form-style{
+  min-width: 100%;
+  position: relative; left: 25%;
+}
+
+@media only screen and (max-width: 580px) {
+  .form-style{
+   max-width: 3cm;
+
+  }
+}

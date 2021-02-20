@@ -1,49 +1,57 @@
 <div class="">
-  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #009CDA;">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
-      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div style="position: relative; ">
-      <button class="btn btn-primary" style="cursor: pointer;" (click)="cerrar()">{{usuario}}</button>
-    </div>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav mr-auto pd-2">
-        <li class="nav-item ">
-          <a style="cursor: pointer;" (click)="home()">INICIO </a>
-        </li>
-        <li class="nav-item ">
-          <a style="cursor: pointer;" (click)="cerrar()">Cerrar Sesión </a>
-        </li>
-      </ul>
-
-    </div>
-  </nav>
-  <div class="row">
-    <div class="col">
-      <a class="" style="cursor: pointer;" (click)="home()">Home</a>
-      <a class=" ">- Mapa</a>
-    </div>
+  <div class="col col-12">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #009CDA;">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div style="position: relative; ">
+        <button class="btn btn-primary" style="cursor: pointer;" (click)="cerrar()">{{usuario}}</button>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto pd-2">
+          <li class="nav-item ">
+            <a style="cursor: pointer;" (click)="home()">INICIO </a>
+          </li>
+          <li class="nav-item ">
+            <a style="cursor: pointer;" (click)="cerrar()">Cerrar Sesión </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
   </div>
-
-  <div class="" style="padding: 1cm;">
-    <div class="row card mat-elevation-z8 col-11 redondeado" style=" min-width: 10cm; padding-top: 1cm;">
-      <div class="redondeado" id="myMap" style="height: 10cm; max-width: 99%; ">
-      </div> <br>
-      <div class="col-12 justify-content-center" style="position: relative; left: 45%;">
-        <button (click)="moverIzquierda()"><span class="material-icons">
-            keyboard_arrow_left
-          </span></button>
-        <button (click)="moverDerecha()"><span class="material-icons">
-            keyboard_arrow_right
-          </span></button>
+  <div class="col col-12">
+    <div class="row ">
+      <div class="col">
+        <a class="" style="cursor: pointer;" (click)="home()">Home</a>
+        <a class=" ">- Mapa</a>
       </div>
-      <div class="row ">
+    </div>
 
-        <app-form-point-admin (coordenada)="addPunto($event)"></app-form-point-admin>
-
-
+    <div class="" style="padding: 1cm;">
+      <div class="row card mat-elevation-z8 col-12 redondeado" style=" min-width: 100%; padding-top: 1cm;">
+        <div class="redondeado" id="myMap" style="height: 10cm; max-width: 99%; ">
+        </div> <br>
+        <p style="text-align: center;">Navegar entre Puntos</p>
+        <div class="col-12 justify-content-center" style="position: relative; left: 43%;">
+          <button (click)="moverIzquierda()"><span class="material-icons">
+              keyboard_arrow_left
+            </span></button>
+          <button (click)="moverDerecha()"><span class="material-icons">
+              keyboard_arrow_right
+            </span></button>
+        </div>
+        <div class="h-100 br-primary">
+          <div class="container h-100">
+            <div class="row justify-content-center h-100">
+              <div class="col col-12"  >
+                <app-form-point-admin (coordenada)="addPunto($event)"></app-form-point-admin> <br> <br>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 </div>

@@ -1,31 +1,32 @@
 <br><br>
-<div class="card justify-content-center" style="max-width: 50%; position: relative; left: 30%;"> <br><br>
-<h1 class="" style="text-align: center;">Agregar Marcador</h1>
-  <form [formGroup]="formulario" style="max-width: 35%; padding-left: 1cm; position: relative; left: 30%;">
+
+<div class="card mat-elevation-z8"> <br><br>
+  <h1 class="" style="text-align: center; font-weight: bold;">Agregar Marcador</h1>
+  <form [formGroup]="formulario" style="max-width: 50%; position: relative; left: 20%;">
     <div class="row">
-      <mat-form-field class="desc ">
+      <mat-form-field>
         <mat-label>Descripcion</mat-label>
-        <input matInput type="text" formControlName="descripcion" name="descripcion" id="descripcion" class="form-control"
-        placeholder="Digite una Descripción">
+        <input matInput type="text" formControlName="descripcion" name="descripcion" id="descripcion"
+          class="form-control" placeholder="Digite una Descripción">
       </mat-form-field>
     </div>
     <div class="row">
-      <mat-form-field class="lat ">
+      <mat-form-field>
         <mat-label>Latitud </mat-label>
         <input matInput type="number" formControlName="latitud" name="latitud" id="latitud" class="form-control"
-        placeholder="Digite latitud">
+          placeholder="Digite latitud">
       </mat-form-field>
     </div>
 
-   <div class="row">
-    <mat-form-field class="long ">
-      <mat-label>Latitud</mat-label>
-      <input matInput type="number" formControlName="longitud" name="longitud" id="longitud" class="form-control"
-      placeholder="Digite longitud">
-    </mat-form-field>
-   </div>
-      <button class="btn btn-primary" *ngIf="errores()" disabled >Agregar</button>
-      <button class="btn btn-primary" *ngIf="!errores()" (click)="onSubmit()">Agregar</button>
+    <div class="row">
+      <mat-form-field>
+        <mat-label>Latitud</mat-label>
+        <input matInput type="number" formControlName="longitud" name="longitud" id="longitud" class="form-control"
+          placeholder="Digite longitud">
+      </mat-form-field>
+    </div>
+    <button class="btn btn-primary" style="position: relative;left: 1cm;" *ngIf="errores()" disabled>Agregar</button>
+    <button class="btn btn-primary" *ngIf="!errores()" (click)="onSubmit()">Agregar</button>
+  </form> <br>
 
-  </form>
 </div>
