@@ -12,4 +12,9 @@
   text-align: center;
   align-content: center; color: white;  padding-top: 2cm; font-size: 3cm;
 }
+.footer_tittle{
+  text-align: center;
+  align-content: center; color: rgb(21, 50, 216);
+  font-weight: bold;
+}
 

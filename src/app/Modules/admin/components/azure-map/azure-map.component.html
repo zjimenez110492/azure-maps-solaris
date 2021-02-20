@@ -1,7 +1,10 @@
 <div class="">
-  <ul class="row nav nav-pills" style="">
+  <ul class="nav nav-pills" style="">
     <li class="nav-item">
-      <a class="nav-link active fuente2" style="cursor: pointer;">Mapa</a>
+      <a class="nav-link active " style="cursor: pointer;">Mapa</a>
+    </li>
+    <li class="nav-item" style="position: relative; left: 70%;">
+      <a class="nav-link active " style="cursor: pointer;" (click)="cerrar()">{{usuario}}</a>
     </li>
   </ul>
   <div class="" style="padding: 1cm;">
@@ -10,14 +13,17 @@
       </div> <br>
       <div class="col-12 justify-content-center" style="position: relative; left: 45%;">
         <button (click)="moverIzquierda()"><span class="material-icons">
-          keyboard_arrow_left
+            keyboard_arrow_left
           </span></button>
-          <button (click)="moverDerecha()"><span class="material-icons">
+        <button (click)="moverDerecha()"><span class="material-icons">
             keyboard_arrow_right
-            </span></button>
+          </span></button>
       </div>
       <div class="row ">
+
         <app-form-point-admin (coordenada)="addPunto($event)"></app-form-point-admin>
+
+
       </div>
     </div>
   </div>

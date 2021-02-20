@@ -2,6 +2,8 @@ import { CoordenadasService } from './../../services/coordenadas.service';
 import { Coordenada } from './../../models/coordenada.model';
 import { Component, Input, OnInit } from '@angular/core';
 import * as atlas from 'azure-maps-control';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-azure-map',
@@ -14,8 +16,10 @@ export class AzureMapComponent implements OnInit {
   coordenadas:Coordenada[];
   positionNav:number;
   map=null;
-  constructor(private coordenadasService:CoordenadasService) { }
+  usuario:string;
+  constructor(private coordenadasService:CoordenadasService,   public router: Router) { }
   ngOnInit(): void {
+    this.usuario=localStorage.getItem('usuario');
 this.coordenadas=[];
 this.positionNav=0;
 
@@ -98,13 +102,8 @@ this.positionNav=0;
        }
      });
    }
-
    this.marcarPuntos();
-
   }
-
-
-
 
   addPunto(c:Coordenada)
   {
@@ -126,6 +125,23 @@ this.positionNav=0;
           marker.togglePopup();
       });
 
+  }
+  cerrar(){
+    Swal.fire({
+      title: 'Desea Cerrar Sesión?',
+      showDenyButton: false,
+      showCancelButton: true,
+      confirmButtonText: `Si`,
+      denyButtonText: `No`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        localStorage.setItem('token','');
+        this.router.navigateByUrl('');
+        Swal.fire('Sesión Cerrada');
+
+      }
+    })
   }
 
 }

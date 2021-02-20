@@ -60,7 +60,8 @@ export class LoginUserComponent implements OnInit {
    this.loginService.onLogin(u).subscribe(result=>{
      console.log("Resultado de login:   ",result);
      if(result.res){
-       localStorage.setItem('token',result.token);
+      localStorage.setItem('token',result.token);
+      localStorage.setItem('usuario',(u.usuario.split("@"))[0]);
        this.router.navigateByUrl('map');
      }
      else{

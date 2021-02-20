@@ -6,7 +6,7 @@ import { HomeUserComponent } from './components/home-user/home-user.component';
 import { LoginUserComponent } from './components/login-user/login-user.component';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button'
-
+import {MatDividerModule} from '@angular/material/divider';
 @NgModule({
   declarations: [HomeUserComponent, LoginUserComponent],
   imports: [
@@ -14,7 +14,8 @@ import {MatButtonModule} from '@angular/material/button'
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDividerModule
   ]
 })
 export class UserModule { }
