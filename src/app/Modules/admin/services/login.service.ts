@@ -8,8 +8,10 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class LoginService {
-
-  constructor(private http: HttpClient) { }
+  isLogged:boolean;
+  constructor(private http: HttpClient) {
+    this.isLogged=false;
+   }
   onLogin(u:Usuario): Observable<any>
     {
       return this.http.post(environment.url_back_end +'/usuario',u);
@@ -17,5 +19,12 @@ export class LoginService {
     getCentro(): Observable<any>
     {
       return this.http.get(environment.url_back_end +'/centro');
+    }
+    cerrarSesion(){
+      this.isLogged=false;
+      localStorage.setItem('token','');
+    }
+    is_Logged(){
+      return this.isLogged;
     }
 }

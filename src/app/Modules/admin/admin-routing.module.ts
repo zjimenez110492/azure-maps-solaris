@@ -1,3 +1,4 @@
+import { GuardAdminGuard } from './guard-admin.guard';
 import { AzureMapComponent } from './components/azure-map/azure-map.component';
 
 import { ListUbicacionesComponent } from './components/list-ubicaciones/list-ubicaciones.component';
@@ -23,6 +24,7 @@ const routes: Routes = [
       {
         path: 'map',
         component: AzureMapComponent,
+        canActivate: [GuardAdminGuard],
         data:
         {
           title: 'Mapa'

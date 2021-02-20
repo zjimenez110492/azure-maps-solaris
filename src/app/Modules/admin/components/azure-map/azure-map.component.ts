@@ -1,3 +1,4 @@
+import { LoginService } from './../../services/login.service';
 import { CoordenadasService } from './../../services/coordenadas.service';
 import { Coordenada } from './../../models/coordenada.model';
 import { Component, Input, OnInit } from '@angular/core';
@@ -18,12 +19,9 @@ export class AzureMapComponent implements OnInit {
   map = null;
   usuario: string;
   indice: number;
-  constructor(private coordenadasService: CoordenadasService, public router: Router) { }
+  constructor(private coordenadasService: CoordenadasService, public router: Router, private logginService:LoginService) { }
   ngOnInit(): void {
     this.indice = 1;
-    if (localStorage.getItem('token') == '') {
-      this.router.navigateByUrl('');
-    }
     this.usuario = localStorage.getItem('usuario');
     this.coordenadas = [];
     this.positionNav = -1;
@@ -99,10 +97,6 @@ this.addPunto(c);
   }
 
   addPunto(c: Coordenada) {
-    console.log("Coordenada recibida:   ", c);
-
-
-    var popupTemplate = '<div class="customInfobox"><div class="name">{name}</div>{description}</div>';
 
     let popup=new atlas.Popup({
       content: '<div class="customInfobox" style="padding: 0.3cm;"> <p style="color: white;">'+c.descripcion+'</p></div>' +
@@ -136,6 +130,7 @@ this.addPunto(c);
       if (result.isConfirmed) {
         localStorage.setItem('token', '');
         this.router.navigateByUrl('');
+        this.logginService.isLogged=false;
         Swal.fire('Sesión Cerrada');
       }
     })

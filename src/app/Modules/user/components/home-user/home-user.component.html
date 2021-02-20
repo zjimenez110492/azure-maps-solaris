@@ -1,3 +1,27 @@
+<header [hidden]="!isLogged">
+  <div class="col col-12">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #009CDA;">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div style="position: relative; ">
+        <button class="btn btn-primary" style="cursor: pointer;" (click)="cerrar()">{{usuario}}</button>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto pd-2">
+          <br>
+          <li class="nav-item ">
+            <a style="cursor: pointer; color: white;" (click)="map()">Map </a>
+          </li>
+          <li class="nav-item ">
+            <a style="cursor: pointer; color: white;" (click)="cerrar">Cerrar Sesión </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
 <body>
   <div class="fondo-inicio">
     <div class="row">
@@ -6,7 +30,7 @@
         <h2 class="sub-tittle">SMART</h2> <br><br>
         <h2 class="sub-tittle">CITY</h2>
       </div>
-      <div class="col col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" style="padding-top: 2cm; ">
+      <div class="col col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12" style="padding-top: 2cm; " [hidden]="isLogged">
         <app-login-user></app-login-user> <br>
       </div>
     </div>

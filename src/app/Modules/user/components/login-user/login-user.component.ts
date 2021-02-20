@@ -13,26 +13,24 @@ import Swal from 'sweetalert2';
 export class LoginUserComponent implements OnInit {
 
   formulario: FormGroup;
-  log=false;
+  log = false;
   constructor(private formBuilder: FormBuilder, /* private  authService:  AuthService, */
-    public router: Router, private loginService:LoginService) { }
+    public router: Router, private loginService: LoginService) { }
 
   ngOnInit() {
     this.crearFormulario();
-   /*  this.log=this.authService.log; */
+    /*  this.log=this.authService.log; */
 
   }
 
-  errores(): boolean
-  {
+  errores(): boolean {
     return (this.formulario.get('email').hasError('required') ||
-    this.formulario.get('email').hasError('email') ||this.formulario.get('password').hasError('required')
-      ) ? true : false;
+      this.formulario.get('email').hasError('email') || this.formulario.get('password').hasError('required')
+    ) ? true : false;
 
   }
-  mailError():boolean
-  {
-    return this.formulario.get('email').hasError('email')?true:false;
+  mailError(): boolean {
+    return this.formulario.get('email').hasError('email') ? true : false;
   }
   crearFormulario() {
     this.formulario = this.formBuilder.group(
@@ -46,23 +44,32 @@ export class LoginUserComponent implements OnInit {
       }
     );
   }
-  ingresar()
-  {
-    let u:Usuario={
-      usuario:this.formulario.get('email').value,
-      password:this.formulario.get('password').value
+  ingresar() {
+    let u: Usuario = {
+      usuario: this.formulario.get('email').value,
+      password: this.formulario.get('password').value
     };
-   this.loginService.onLogin(u).subscribe(result=>{
-     console.log("Resultado de login:   ",result);
-     if(result.res){
-      localStorage.setItem('token',result.token);
-      localStorage.setItem('usuario',(u.usuario.split("@"))[0]);
-       this.router.navigateByUrl('map');
-     }
-     else{
-      Swal.fire('usuario no registrado');
-     }
-   })
+    this.loginService.onLogin(u).subscribe(result => {
+      console.log("Resultado de login:   ", result);
+      if (result.res) {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Iniciando Sesión',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        this.loginService.isLogged = true;
+        localStorage.setItem('token', result.token);
+        localStorage.setItem('usuario', (u.usuario.split("@"))[0]);
+        this.router.navigateByUrl('map');
+      }
+      else {
+        this.loginService.cerrarSesion();
+        Swal.fire('usuario no registrado');
+        this.router.navigateByUrl('');
+      }
+    })
   }
 
 }
