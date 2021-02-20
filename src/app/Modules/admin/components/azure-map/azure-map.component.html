@@ -1,12 +1,31 @@
 <div class="">
-  <ul class="nav nav-pills" style="">
-    <li class="nav-item">
-      <a class="nav-link active " style="cursor: pointer;">Mapa</a>
-    </li>
-    <li class="nav-item" style="position: relative; left: 70%;">
-      <a class="nav-link active " style="cursor: pointer;" (click)="cerrar()">{{usuario}}</a>
-    </li>
-  </ul>
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #009CDA;">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div style="position: relative; ">
+      <button class="btn btn-primary" style="cursor: pointer;" (click)="cerrar()">{{usuario}}</button>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto pd-2">
+        <li class="nav-item ">
+          <a style="cursor: pointer;" (click)="home()">INICIO </a>
+        </li>
+        <li class="nav-item ">
+          <a style="cursor: pointer;" (click)="cerrar()">Cerrar Sesión </a>
+        </li>
+      </ul>
+
+    </div>
+  </nav>
+  <div class="row">
+    <div class="col">
+      <a class="" style="cursor: pointer;" (click)="home()">Home</a>
+      <a class=" ">- Mapa</a>
+    </div>
+  </div>
+
   <div class="" style="padding: 1cm;">
     <div class="row card mat-elevation-z8 col-11 redondeado" style=" min-width: 10cm; padding-top: 1cm;">
       <div class="redondeado" id="myMap" style="height: 10cm; max-width: 99%; ">

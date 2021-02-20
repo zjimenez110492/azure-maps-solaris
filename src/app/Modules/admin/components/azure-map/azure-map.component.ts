@@ -19,9 +19,12 @@ export class AzureMapComponent implements OnInit {
   usuario:string;
   constructor(private coordenadasService:CoordenadasService,   public router: Router) { }
   ngOnInit(): void {
-    this.usuario=localStorage.getItem('usuario');
-this.coordenadas=[];
-this.positionNav=0;
+    if(localStorage.getItem('token')==''){
+      this.router.navigateByUrl('');
+    }
+          this.usuario=localStorage.getItem('usuario');
+          this.coordenadas=[];
+          this.positionNav=0;
 
   }
   ngAfterViewInit(): void {
@@ -139,9 +142,11 @@ this.positionNav=0;
         localStorage.setItem('token','');
         this.router.navigateByUrl('');
         Swal.fire('Sesión Cerrada');
-
       }
     })
+  }
+  home(){
+    this.router.navigateByUrl('');
   }
 
 }

@@ -1,20 +1,44 @@
 .fondo-inicio{
   background-image: url("../../../../../assets/img-inicio.jpeg");
-  height: 15cm;
+  max-height: 15cm;
+  min-width: 100%;
 }
 .tittle{
   font-weight: 1000;
   text-align: center;
-  align-content: center; color: white;  padding-top: 2cm; font-size: 4cm;
+  align-content: center; color: white;  font-size: 4cm;
 }
 
 .sub-tittle{
   text-align: center;
-  align-content: center; color: white;  padding-top: 2cm; font-size: 3cm;
+  align-content: center; color: white;   font-size: 3cm;
 }
 .footer_tittle{
   text-align: center;
   align-content: center; color: rgb(21, 50, 216);
   font-weight: bold;
 }
+@media only screen and (max-width: 600px) {
+  .tittle{
+    font-weight: 1000;
+    text-align: center;
+    align-content: center; color: white;  font-size: 3cm;
+  }
 
+  .sub-tittle{
+    text-align: center;
+    align-content: center; color: white;   font-size: 2cm;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .tittle{
+    font-weight: 1000;
+    text-align: center;
+    align-content: center; color: white;  font-size: 2cm;
+  }
+
+  .sub-tittle{
+    text-align: center;
+    align-content: center; color: white;   font-size: 1cm;
+  }
+}

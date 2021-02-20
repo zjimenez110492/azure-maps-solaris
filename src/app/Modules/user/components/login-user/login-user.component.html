@@ -2,8 +2,9 @@
   <div class=" col col-sm-12 col-md-12 col-lg-6 "  >
     <div class="card " style="width: 9cm;">
 
-          <h2 style="text-align: center; padding-top: 1.5cm;">BIENVENIDO</h2>
-          <form [formGroup]="formulario" style="padding-left: 1cm;">
+          <h2 style="text-align: center; padding-top: 1cm;">BIENVENIDO</h2>
+          <div class="">
+            <form [formGroup]="formulario" style="padding-left: 1cm;">
             <mat-form-field class="center">
               <mat-label>Usuario <small *ngIf="mailError()" style="color: red;">Formato correo
                 Inválido</small></mat-label>
@@ -24,6 +25,7 @@
 
             </div>
 
-          </form> <br><br>
+          </form> <br>
+          </div>
     </div>
   </div>
